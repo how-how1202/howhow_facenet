@@ -22,7 +22,17 @@ sklearn = "^0.0"
 Pillow = "^8.3.0"
 
 #protobuf = "3.6.0"
-
+#### 測試compare.py
+1. 先切換python3.6
+poetry env use 3.6
+2. 將.toml檔案放入資料夾
+3. 安裝相關套件
+poetry install
+4. 修改align/detec_face.py 85行
+data_dict = np.load(data_path, allow_pickle = True , encoding='latin1').item()
+5. 下載權重：https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/583535/ 並放到同一個路徑下
+6. 開始測試compaer.py
+python compare.py "權重檔案名稱" "img1" "img2"(若人臉不清楚將無法測試)
 
 This is a TensorFlow implementation of the face recognizer described in the paper
 ["FaceNet: A Unified Embedding for Face Recognition and Clustering"](http://arxiv.org/abs/1503.03832). The project also uses ideas from the paper ["Deep Face Recognition"](http://www.robots.ox.ac.uk/~vgg/publications/2015/Parkhi15/parkhi15.pdf) from the [Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/) at Oxford.
