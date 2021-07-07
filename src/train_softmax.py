@@ -188,7 +188,11 @@ def main(args):
 
         # Start running operations on the Graph.
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=args.gpu_memory_fraction)
-        sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
+        
+        config = tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False, allow_soft_placement=True)
+        config.gpu_options.allow_growth = True
+        sess = tf.Session(config=config)
+        #sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
         sess.run(tf.global_variables_initializer())
         sess.run(tf.local_variables_initializer())
         summary_writer = tf.summary.FileWriter(log_dir, sess.graph)
@@ -305,7 +309,7 @@ def train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_o
     else:
         lr = facenet.get_learning_rate_from_file(learning_rate_schedule_file, epoch)
         
-    if lr<=0:
+    if lr is None or lr <= 0:#if lr<=0:
         return False 
 
     index_epoch = sess.run(index_dequeue_op)
