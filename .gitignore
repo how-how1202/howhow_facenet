@@ -2,7 +2,7 @@ led / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
+poetry.lock
 # C extensions
 *.so
 20170511-185253
@@ -29,6 +29,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.gitignore.swo
+.gitignore.swp
+.poetry.lock.swp
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
